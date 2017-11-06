@@ -827,8 +827,8 @@ class Molecule(LibmintsMolecule):
             #'CL': 1.639 / 1.5,  # JMol
             'AR': 1.595 / 1.5,  # JMol
 
-            'KR': 2.02 / 1.5  # Google
-            'RN': 1.595 / 1.5 # extrapolation
+            'KR': 2.02 / 1.5,  # Google
+            'RN': 1.595 / 1.5, # extrapolation
 
             'H': 1.06 / 1.5,  # Bondi JPC 68 441 (1964)
             'B': 1.65 / 1.5,  # Bondi JPC 68 441 (1964)
