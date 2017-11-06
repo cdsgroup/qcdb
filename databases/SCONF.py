@@ -1,11 +1,38 @@
+#
+# @BEGIN LICENSE
+#
+# QCDB: quantum chemistry common driver and databases
+#
+# Copyright (c) 2011-2017 The QCDB Developers.
+#
+# The copyrights for code used from other parties are included in
+# the corresponding files.
+#
+# This file is part of QCDB.
+#
+# QCDB is free software; you can redistribute it and/or modify
+# it under the terms of the GNU Lesser General Public License as published by
+# the Free Software Foundation, version 3.
+#
+# QCDB is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU Lesser General Public License for more details.
+#
+# You should have received a copy of the GNU Lesser General Public License along
+# with QCDB; if not, write to the Free Software Foundation, Inc.,
+# 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+#
+# @END LICENSE
+#
+
 """
-| Database of <description of members and reference energy type>.
-| Geometries from <Reference>.
-http://www.thch.uni-bonn.de/tc/downloads/GMTKN/GMTKN30/SCONF.html
-| Reference interaction energies from <Reference>.
-Taken from Csonka, G. I.; French, A. D.; Johnson, G. P.; Stortz, C. A. J. Chem. Theory. Comput. 2009, 5, 679-692;
-and Goerigk, L.; Grimme, S. J. Chem. Theory. Comput. 2010, 6, 107-126.
-(estimated CCSD(T)/CBS); all values are in kcal/mol.
+| Database (Stortz) of conformation energies for sugars.
+| Geometries and reference energies from
+http://www.thch.uni-bonn.de/tc/downloads/GMTKN/GMTKN30/SCONF.html .
+| Taken from Csonka, G. I.; French, A. D.; Johnson, G. P.; Stortz, C. A. J. Chem. Theory. Comput. 2009, 5, 679-692;
+| and Goerigk, L.; Grimme, S. J. Chem. Theory. Comput. 2010, 6, 107-126.
+| (estimated CCSD(T)/CBS); all values are in kcal/mol.
 
 
 - **benchmark**
@@ -102,64 +129,78 @@ RXNM['%s-%s'            % (dbse, '17'                    )] = dict(zip(ACTV['%s-
 
 # <<< Reference Values [kcal/mol] >>>
 BIND = {}
-BIND['%s-%s'            % (dbse, '1'                     )] =    0.83
-BIND['%s-%s'            % (dbse, '2'                     )] =    2.60
-BIND['%s-%s'            % (dbse, '3'                     )] =    3.37
-BIND['%s-%s'            % (dbse, '4'                     )] =    4.87
-BIND['%s-%s'            % (dbse, '5'                     )] =    5.18
-BIND['%s-%s'            % (dbse, '6'                     )] =    4.47
-BIND['%s-%s'            % (dbse, '7'                     )] =    4.68
-BIND['%s-%s'            % (dbse, '8'                     )] =    6.69
-BIND['%s-%s'            % (dbse, '9'                     )] =    6.75
-BIND['%s-%s'            % (dbse, '10'                    )] =    6.08
-BIND['%s-%s'            % (dbse, '11'                    )] =    6.05
-BIND['%s-%s'            % (dbse, '12'                    )] =    6.17
-BIND['%s-%s'            % (dbse, '13'                    )] =    6.75
-BIND['%s-%s'            % (dbse, '14'                    )] =    6.71
-BIND['%s-%s'            % (dbse, '15'                    )] =    0.27
-BIND['%s-%s'            % (dbse, '16'                    )] =    5.92
-BIND['%s-%s'            % (dbse, '17'                    )] =    5.29
+# Original publication
+#BIND_SCONF0 = {}
+# Current revision
+BIND_SCONFA = {}
+BIND_SCONFA['%s-%s'            % (dbse, '1'                     )] =    0.83
+BIND_SCONFA['%s-%s'            % (dbse, '2'                     )] =    2.60
+BIND_SCONFA['%s-%s'            % (dbse, '3'                     )] =    3.37
+BIND_SCONFA['%s-%s'            % (dbse, '4'                     )] =    4.87
+BIND_SCONFA['%s-%s'            % (dbse, '5'                     )] =    5.18
+BIND_SCONFA['%s-%s'            % (dbse, '6'                     )] =    4.47
+BIND_SCONFA['%s-%s'            % (dbse, '7'                     )] =    4.68
+BIND_SCONFA['%s-%s'            % (dbse, '8'                     )] =    6.69
+BIND_SCONFA['%s-%s'            % (dbse, '9'                     )] =    6.75
+BIND_SCONFA['%s-%s'            % (dbse, '10'                    )] =    6.08
+BIND_SCONFA['%s-%s'            % (dbse, '11'                    )] =    6.05
+BIND_SCONFA['%s-%s'            % (dbse, '12'                    )] =    6.17
+BIND_SCONFA['%s-%s'            % (dbse, '13'                    )] =    6.75
+BIND_SCONFA['%s-%s'            % (dbse, '14'                    )] =    6.71
+BIND_SCONFA['%s-%s'            % (dbse, '15'                    )] =    0.27
+BIND_SCONFA['%s-%s'            % (dbse, '16'                    )] =    5.92
+BIND_SCONFA['%s-%s'            % (dbse, '17'                    )] =    5.29
+# Set default
+BIND = BIND_SCONFA
+# Reference information
+BINDINFO_SCONFA = {}
+for rxn in HRXN:
+    # Table S23
+    if rxn in ['15', '16', '17']:
+        # actually, private communication with G. I. Csonka in listed citation
+        BINDINFO_SCONFA['%s-%s' % (dbse, rxn)] = {'citation': 'gmtkn24', 'method': 'CCSDT', 'mode': 'unCP', 'basis': 'atqztz'}
+    else:
+        BINDINFO_SCONFA['%s-%s' % (dbse, rxn)] = {'citation': 'gmtkn24', 'method': 'CCSDT', 'mode': 'unCP', 'basis': 'adtzdz'}
 
 # <<< Comment Lines >>>
 TAGL = {}
-TAGL['%s-%s'            % (dbse, '1'                     )] = """Reaction 1 """
-TAGL['%s-%s'            % (dbse, '2'                     )] = """Reaction 2 """
-TAGL['%s-%s'            % (dbse, '3'                     )] = """Reaction 3 """
-TAGL['%s-%s'            % (dbse, '4'                     )] = """Reaction 4 """
-TAGL['%s-%s'            % (dbse, '5'                     )] = """Reaction 5 """
-TAGL['%s-%s'            % (dbse, '6'                     )] = """Reaction 6 """
-TAGL['%s-%s'            % (dbse, '7'                     )] = """Reaction 7 """
-TAGL['%s-%s'            % (dbse, '8'                     )] = """Reaction 8 """
-TAGL['%s-%s'            % (dbse, '9'                     )] = """Reaction 9 """
-TAGL['%s-%s'            % (dbse, '10'                    )] = """Reaction 10 """
-TAGL['%s-%s'            % (dbse, '11'                    )] = """Reaction 11 """
-TAGL['%s-%s'            % (dbse, '12'                    )] = """Reaction 12 """
-TAGL['%s-%s'            % (dbse, '13'                    )] = """Reaction 13 """
-TAGL['%s-%s'            % (dbse, '14'                    )] = """Reaction 14 """
-TAGL['%s-%s'            % (dbse, '15'                    )] = """Reaction 15 """
-TAGL['%s-%s'            % (dbse, '16'                    )] = """Reaction 16 """
-TAGL['%s-%s'            % (dbse, '17'                    )] = """Reaction 17 """
-TAGL['%s-%s-reagent'    % (dbse, 'C1'                    )] = """ """
-TAGL['%s-%s-reagent'    % (dbse, 'C10'                   )] = """ """
-TAGL['%s-%s-reagent'    % (dbse, 'C11'                   )] = """ """
-TAGL['%s-%s-reagent'    % (dbse, 'C12'                   )] = """ """
-TAGL['%s-%s-reagent'    % (dbse, 'C13'                   )] = """ """
-TAGL['%s-%s-reagent'    % (dbse, 'C14'                   )] = """ """
-TAGL['%s-%s-reagent'    % (dbse, 'C15'                   )] = """ """
-TAGL['%s-%s-reagent'    % (dbse, 'C2'                    )] = """ """
-TAGL['%s-%s-reagent'    % (dbse, 'C3'                    )] = """ """
-TAGL['%s-%s-reagent'    % (dbse, 'C4'                    )] = """ """
-TAGL['%s-%s-reagent'    % (dbse, 'C5'                    )] = """ """
-TAGL['%s-%s-reagent'    % (dbse, 'C6'                    )] = """ """
-TAGL['%s-%s-reagent'    % (dbse, 'C7'                    )] = """ """
-TAGL['%s-%s-reagent'    % (dbse, 'C8'                    )] = """ """
-TAGL['%s-%s-reagent'    % (dbse, 'C9'                    )] = """ """
-TAGL['%s-%s-reagent'    % (dbse, 'G1'                    )] = """ """
-TAGL['%s-%s-reagent'    % (dbse, 'G2'                    )] = """ """
-TAGL['%s-%s-reagent'    % (dbse, 'G3'                    )] = """ """
-TAGL['%s-%s-reagent'    % (dbse, 'G4'                    )] = """ """
-
-TAGL['dbse'] = 'comformation energies for sugars'
+TAGL['%s-%s'            % (dbse, '1'                     )] = """AnGol15 C2 vs. C1"""
+TAGL['%s-%s'            % (dbse, '2'                     )] = """AnGol15 C3 vs. C1"""
+TAGL['%s-%s'            % (dbse, '3'                     )] = """AnGol15 C4 vs. C1"""
+TAGL['%s-%s'            % (dbse, '4'                     )] = """AnGol15 C5 vs. C1"""
+TAGL['%s-%s'            % (dbse, '5'                     )] = """AnGol15 C6 vs. C1"""
+TAGL['%s-%s'            % (dbse, '6'                     )] = """AnGol15 C7 vs. C1"""
+TAGL['%s-%s'            % (dbse, '7'                     )] = """AnGol15 C8 vs. C1"""
+TAGL['%s-%s'            % (dbse, '8'                     )] = """AnGol15 C9 vs. C1"""
+TAGL['%s-%s'            % (dbse, '9'                     )] = """AnGol15 C10 vs. C1"""
+TAGL['%s-%s'            % (dbse, '10'                    )] = """AnGol15 C11 vs. C1"""
+TAGL['%s-%s'            % (dbse, '11'                    )] = """AnGol15 C12 vs. C1"""
+TAGL['%s-%s'            % (dbse, '12'                    )] = """AnGol15 C13 vs. C1"""
+TAGL['%s-%s'            % (dbse, '13'                    )] = """AnGol15 C14 vs. C1"""
+TAGL['%s-%s'            % (dbse, '14'                    )] = """AnGol15 C15 vs. C1"""
+TAGL['%s-%s'            % (dbse, '15'                    )] = """GLC4 G2 vs. G1"""
+TAGL['%s-%s'            % (dbse, '16'                    )] = """GLC4 G3 vs. G1"""
+TAGL['%s-%s'            % (dbse, '17'                    )] = """GLC4 G4 vs. G1"""
+TAGL['%s-%s-reagent'    % (dbse, 'C1'                    )] = """AnGol15 C1"""
+TAGL['%s-%s-reagent'    % (dbse, 'C10'                   )] = """AnGol15 C10"""
+TAGL['%s-%s-reagent'    % (dbse, 'C11'                   )] = """AnGol15 C11"""
+TAGL['%s-%s-reagent'    % (dbse, 'C12'                   )] = """AnGol15 C12"""
+TAGL['%s-%s-reagent'    % (dbse, 'C13'                   )] = """AnGol15 C13"""
+TAGL['%s-%s-reagent'    % (dbse, 'C14'                   )] = """AnGol15 C14"""
+TAGL['%s-%s-reagent'    % (dbse, 'C15'                   )] = """AnGol15 C15"""
+TAGL['%s-%s-reagent'    % (dbse, 'C2'                    )] = """AnGol15 C2"""
+TAGL['%s-%s-reagent'    % (dbse, 'C3'                    )] = """AnGol15 C3"""
+TAGL['%s-%s-reagent'    % (dbse, 'C4'                    )] = """AnGol15 C4"""
+TAGL['%s-%s-reagent'    % (dbse, 'C5'                    )] = """AnGol15 C5"""
+TAGL['%s-%s-reagent'    % (dbse, 'C6'                    )] = """AnGol15 C6"""
+TAGL['%s-%s-reagent'    % (dbse, 'C7'                    )] = """AnGol15 C7"""
+TAGL['%s-%s-reagent'    % (dbse, 'C8'                    )] = """AnGol15 C8"""
+TAGL['%s-%s-reagent'    % (dbse, 'C9'                    )] = """AnGol15 C9"""
+TAGL['%s-%s-reagent'    % (dbse, 'G1'                    )] = """GLC4 G1"""
+TAGL['%s-%s-reagent'    % (dbse, 'G2'                    )] = """GLC4 G2"""
+TAGL['%s-%s-reagent'    % (dbse, 'G3'                    )] = """GLC4 G3"""
+TAGL['%s-%s-reagent'    % (dbse, 'G4'                    )] = """GLC4 G4"""
+TAGL['dbse'] = 'conformation energies for sugars'
 TAGL['default'] = 'entire database'
 
 # <<< Geometry Specification Strings >>>

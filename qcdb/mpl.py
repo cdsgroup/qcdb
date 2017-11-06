@@ -1,3 +1,31 @@
+#
+# @BEGIN LICENSE
+#
+# QCDB: quantum chemistry common driver and databases
+#
+# Copyright (c) 2011-2017 The QCDB Developers.
+#
+# The copyrights for code used from other parties are included in
+# the corresponding files.
+#
+# This file is part of QCDB.
+#
+# QCDB is free software; you can redistribute it and/or modify
+# it under the terms of the GNU Lesser General Public License as published by
+# the Free Software Foundation, version 3.
+#
+# QCDB is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU Lesser General Public License for more details.
+#
+# You should have received a copy of the GNU Lesser General Public License along
+# with QCDB; if not, write to the Free Software Foundation, Inc.,
+# 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+#
+# @END LICENSE
+#
+
 """Module with matplotlib plotting routines. These are not hooked up to
 any particular qcdb data structures but can be called with basic
 arguments.
@@ -10,7 +38,7 @@ import os
 #matplotlib.use('Agg')
 
 
-def expand_saveas(saveas, def_filename, def_path=os.path.abspath(os.curdir), def_prefix='', relpath=False):
+def expand_saveas(saveas, def_filename, def_path=None, def_prefix='', relpath=False):
     """Analyzes string *saveas* to see if it contains information on
     path to save file, name to save file, both or neither (*saveas*
     ends in '/' to indicate directory only) (able to expand '.'). A full
@@ -21,6 +49,9 @@ def expand_saveas(saveas, def_filename, def_path=os.path.abspath(os.curdir), def
     to identify the type of figure.
 
     """
+    if def_path is None:
+        def_path=os.path.abspath(os.curdir)
+
     defname = def_prefix + def_filename.replace(' ', '_')
     if saveas is None:
         pth = def_path
@@ -906,8 +937,7 @@ def iowa(mcdat, mclbl, title='', xtitle='', xlimit=2.0, view=True,
     import matplotlib
     import matplotlib.pyplot as plt
 
-    aa = ['ARG', 'HIE', 'LYS', 'ASP', 'GLU', 'SER', 'THR', 'ASN', 'GLN', 'CYS', 'MET', 'GLY', 'ALA', 'VAL', 'ILE', 'LEU', 'PRO', 'PHE', 'TYR', 'TRP']
-    #aa = ['ILE', 'LEU', 'ASP', 'GLU', 'PHE']
+    aa = ['ARG', 'LYS', 'ASP', 'GLU', 'SER', 'THR', 'ASN', 'GLN', 'CYS', 'MET', 'GLY', 'ALA', 'VAL', 'ILE', 'LEU', 'PRO', 'PHE', 'TYR', 'HIE', 'TRP']
     err = dict(zip(mclbl, mcdat))
 
     # handle for frame, overall axis
@@ -942,12 +972,10 @@ def iowa(mcdat, mclbl, title='', xtitle='', xlimit=2.0, view=True,
             index += 1
 
     #plt.title(title)
-    axt.axvline(x=4.8, linewidth=5, color='k')
-    axt.axvline(x=8.75, linewidth=5, color='k')
-    axt.axvline(x=11.6, linewidth=5, color='k')
-    axt.axhline(y=4.8, linewidth=5, color='k')
-    axt.axhline(y=8.75, linewidth=5, color='k')
-    axt.axhline(y=11.6, linewidth=5, color='k')
+    # HIE in +: 4.8, 8.75, 11.6
+    for posn in [3.85, 7.75, 10.65]:
+        axt.axvline(x=posn, linewidth=5, color='k')
+        axt.axhline(y=posn, linewidth=5, color='k')
     axt.set_zorder(100)
 
     # save and show

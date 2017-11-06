@@ -1,3 +1,31 @@
+#
+# @BEGIN LICENSE
+#
+# QCDB: quantum chemistry common driver and databases
+#
+# Copyright (c) 2011-2017 The QCDB Developers.
+#
+# The copyrights for code used from other parties are included in
+# the corresponding files.
+#
+# This file is part of QCDB.
+#
+# QCDB is free software; you can redistribute it and/or modify
+# it under the terms of the GNU Lesser General Public License as published by
+# the Free Software Foundation, version 3.
+#
+# QCDB is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU Lesser General Public License for more details.
+#
+# You should have received a copy of the GNU Lesser General Public License along
+# with QCDB; if not, write to the Free Software Foundation, Inc.,
+# 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+#
+# @END LICENSE
+#
+
 """Module containing functions that, when passed a qcdb.WrappedDatabase instance
 *dbinstance*, return an array of reaction names that are a subset of
 dbinstance.hrxn.keys(). Since the full database is passed in, reactions
@@ -110,7 +138,7 @@ def genset_allneutral(dbinstance):
 
     """
     eligible = []
-    for rxn, orxn in dbinstance.hrxn.iteritems():
+    for rxn, orxn in dbinstance.hrxn.items():
         if all([True if rgt.charge == 0 else False for rgt in orxn.rxnm['default'].keys()]):
             eligible.append(rxn)
     return eligible
@@ -122,7 +150,7 @@ def genset_anyanion(dbinstance):
 
     """
     eligible = []
-    for rxn, orxn in dbinstance.hrxn.iteritems():
+    for rxn, orxn in dbinstance.hrxn.items():
         for rgt in orxn.rxnm['default'].keys():
             if rgt.charge < 0:
                 eligible.append(rxn)
@@ -136,7 +164,7 @@ def genset_anycation(dbinstance):
 
     """
     eligible = []
-    for rxn, orxn in dbinstance.hrxn.iteritems():
+    for rxn, orxn in dbinstance.hrxn.items():
         for rgt in orxn.rxnm['default'].keys():
             if rgt.charge > 0:
                 eligible.append(rxn)

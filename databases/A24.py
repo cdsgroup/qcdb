@@ -1,29 +1,35 @@
 #
-#@BEGIN LICENSE
+# @BEGIN LICENSE
 #
-# PSI4: an ab initio quantum chemistry software package
+# QCDB: quantum chemistry common driver and databases
 #
-# This program is free software; you can redistribute it and/or modify
-# it under the terms of the GNU General Public License as published by
-# the Free Software Foundation; either version 2 of the License, or
-# (at your option) any later version.
+# Copyright (c) 2011-2017 The QCDB Developers.
 #
-# This program is distributed in the hope that it will be useful,
+# The copyrights for code used from other parties are included in
+# the corresponding files.
+#
+# This file is part of QCDB.
+#
+# QCDB is free software; you can redistribute it and/or modify
+# it under the terms of the GNU Lesser General Public License as published by
+# the Free Software Foundation, version 3.
+#
+# QCDB is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU General Public License for more details.
+# GNU Lesser General Public License for more details.
 #
-# You should have received a copy of the GNU General Public License along
-# with this program; if not, write to the Free Software Foundation, Inc.,
+# You should have received a copy of the GNU Lesser General Public License along
+# with QCDB; if not, write to the Free Software Foundation, Inc.,
 # 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 #
-#@END LICENSE
+# @END LICENSE
 #
 
 """
 | Database (Hobza) of interaction energies for bimolecular complexes.
-| Geometries from <Reference>.
-| Reference interaction energies from Rezac and Hobza, JCTC (in press).
+| Geometries from JCTC 9 2151 (2013).
+| Reference interaction energies from Rezac and Hobza, and others (see below).
 
 
 - **cp**  ``'off'`` <erase this comment and after unless on is a valid option> || ``'on'``
@@ -32,9 +38,9 @@
 
 - **benchmark**
 
-  - ``'HOBZA'`` original pub, Riley et al. JCTC 9 2151 (2013).
-  - ``'AVE'`` weighted average CP/unCP, Burns et al. JCTC 10 49 (2014).
-  - |dl| ``'CDS'`` |dr| highest extrapolated CP CCSD(T) values (aq5z or a56z).
+  - ``'A240'`` original pub, Riley et al. JCTC 9 2151 (2013).
+  - ``'A24A'`` weighted average CP/unCP, Burns et al. JCTC 10 49 (2014).
+  - |dl| ``'A24B'`` |dr| highest extrapolated CP CCSD(T) values (aq5z or a56z).
 
 - **subset**
 
@@ -86,86 +92,128 @@ for rxn in HRXN:
 
 # <<< Reference Values [kcal/mol] >>>
 BIND = {}
-# A240: Original publication JCTC 9 2151 (2013) 
-BIND_HOBZA = {}
-BIND_HOBZA['%s-%s' % (dbse,  1)] =  -6.493
-BIND_HOBZA['%s-%s' % (dbse,  2)] =  -5.006
-BIND_HOBZA['%s-%s' % (dbse,  3)] =  -4.745
-BIND_HOBZA['%s-%s' % (dbse,  4)] =  -4.581
-BIND_HOBZA['%s-%s' % (dbse,  5)] =  -3.137
-BIND_HOBZA['%s-%s' % (dbse,  6)] =  -1.654
-BIND_HOBZA['%s-%s' % (dbse,  7)] =  -0.765
-BIND_HOBZA['%s-%s' % (dbse,  8)] =  -0.663
-BIND_HOBZA['%s-%s' % (dbse,  9)] =  -4.554
-BIND_HOBZA['%s-%s' % (dbse, 10)] =  -2.557
-BIND_HOBZA['%s-%s' % (dbse, 11)] =  -1.621
-BIND_HOBZA['%s-%s' % (dbse, 12)] =  -1.524
-BIND_HOBZA['%s-%s' % (dbse, 13)] =  -1.374
-BIND_HOBZA['%s-%s' % (dbse, 14)] =  -1.090
-BIND_HOBZA['%s-%s' % (dbse, 15)] =  -0.502
-BIND_HOBZA['%s-%s' % (dbse, 16)] =  -1.485
-BIND_HOBZA['%s-%s' % (dbse, 17)] =  -0.827
-BIND_HOBZA['%s-%s' % (dbse, 18)] =  -0.607
-BIND_HOBZA['%s-%s' % (dbse, 19)] =  -0.533
-BIND_HOBZA['%s-%s' % (dbse, 20)] =  -0.405
-BIND_HOBZA['%s-%s' % (dbse, 21)] =  -0.364
-BIND_HOBZA['%s-%s' % (dbse, 22)] =   0.821
-BIND_HOBZA['%s-%s' % (dbse, 23)] =   0.934
-BIND_HOBZA['%s-%s' % (dbse, 24)] =   1.115
+# A240: Original publication JCTC 9 2151 (2013)
+BIND_A240 = {}
+BIND_A240['%s-%s' % (dbse,  1)] =  -6.493
+BIND_A240['%s-%s' % (dbse,  2)] =  -5.006
+BIND_A240['%s-%s' % (dbse,  3)] =  -4.745
+BIND_A240['%s-%s' % (dbse,  4)] =  -4.581
+BIND_A240['%s-%s' % (dbse,  5)] =  -3.137
+BIND_A240['%s-%s' % (dbse,  6)] =  -1.654
+BIND_A240['%s-%s' % (dbse,  7)] =  -0.765
+BIND_A240['%s-%s' % (dbse,  8)] =  -0.663
+BIND_A240['%s-%s' % (dbse,  9)] =  -4.554
+BIND_A240['%s-%s' % (dbse, 10)] =  -2.557
+BIND_A240['%s-%s' % (dbse, 11)] =  -1.621
+BIND_A240['%s-%s' % (dbse, 12)] =  -1.524
+BIND_A240['%s-%s' % (dbse, 13)] =  -1.374
+BIND_A240['%s-%s' % (dbse, 14)] =  -1.090
+BIND_A240['%s-%s' % (dbse, 15)] =  -0.502
+BIND_A240['%s-%s' % (dbse, 16)] =  -1.485
+BIND_A240['%s-%s' % (dbse, 17)] =  -0.827
+BIND_A240['%s-%s' % (dbse, 18)] =  -0.607
+BIND_A240['%s-%s' % (dbse, 19)] =  -0.533
+BIND_A240['%s-%s' % (dbse, 20)] =  -0.405
+BIND_A240['%s-%s' % (dbse, 21)] =  -0.364
+BIND_A240['%s-%s' % (dbse, 22)] =   0.821
+BIND_A240['%s-%s' % (dbse, 23)] =   0.934
+BIND_A240['%s-%s' % (dbse, 24)] =   1.115
 # A24A: Weighted averaged reference used in JCTC 10 49 (2014)
-BIND_AVE = {}
-BIND_AVE['%s-%s' % (dbse,  1)] =  -6.502
-BIND_AVE['%s-%s' % (dbse,  2)] =  -5.007
-BIND_AVE['%s-%s' % (dbse,  3)] =  -4.758
-BIND_AVE['%s-%s' % (dbse,  4)] =  -4.569
-BIND_AVE['%s-%s' % (dbse,  5)] =  -3.131
-BIND_AVE['%s-%s' % (dbse,  6)] =  -1.633
-BIND_AVE['%s-%s' % (dbse,  7)] =  -0.761
-BIND_AVE['%s-%s' % (dbse,  8)] =  -0.669
-BIND_AVE['%s-%s' % (dbse,  9)] =  -4.520
-BIND_AVE['%s-%s' % (dbse, 10)] =  -2.560
-BIND_AVE['%s-%s' % (dbse, 11)] =  -1.618
-BIND_AVE['%s-%s' % (dbse, 12)] =  -1.520
-BIND_AVE['%s-%s' % (dbse, 13)] =  -1.376
-BIND_AVE['%s-%s' % (dbse, 14)] =  -1.088
-BIND_AVE['%s-%s' % (dbse, 15)] =  -0.505
-BIND_AVE['%s-%s' % (dbse, 16)] =  -1.484
-BIND_AVE['%s-%s' % (dbse, 17)] =  -0.831
-BIND_AVE['%s-%s' % (dbse, 18)] =  -0.610
-BIND_AVE['%s-%s' % (dbse, 19)] =  -0.534
-BIND_AVE['%s-%s' % (dbse, 20)] =  -0.397
-BIND_AVE['%s-%s' % (dbse, 21)] =  -0.347
-BIND_AVE['%s-%s' % (dbse, 22)] =   0.835
-BIND_AVE['%s-%s' % (dbse, 23)] =   0.945
-BIND_AVE['%s-%s' % (dbse, 24)] =   1.131
+BIND_A24A = {}
+BIND_A24A['%s-%s' % (dbse,  1)] =  -6.502
+BIND_A24A['%s-%s' % (dbse,  2)] =  -5.007
+BIND_A24A['%s-%s' % (dbse,  3)] =  -4.758
+BIND_A24A['%s-%s' % (dbse,  4)] =  -4.569
+BIND_A24A['%s-%s' % (dbse,  5)] =  -3.131
+BIND_A24A['%s-%s' % (dbse,  6)] =  -1.633
+BIND_A24A['%s-%s' % (dbse,  7)] =  -0.761
+BIND_A24A['%s-%s' % (dbse,  8)] =  -0.669
+BIND_A24A['%s-%s' % (dbse,  9)] =  -4.520
+BIND_A24A['%s-%s' % (dbse, 10)] =  -2.560
+BIND_A24A['%s-%s' % (dbse, 11)] =  -1.618
+BIND_A24A['%s-%s' % (dbse, 12)] =  -1.520
+BIND_A24A['%s-%s' % (dbse, 13)] =  -1.376
+BIND_A24A['%s-%s' % (dbse, 14)] =  -1.088
+BIND_A24A['%s-%s' % (dbse, 15)] =  -0.505
+BIND_A24A['%s-%s' % (dbse, 16)] =  -1.484
+BIND_A24A['%s-%s' % (dbse, 17)] =  -0.831
+BIND_A24A['%s-%s' % (dbse, 18)] =  -0.610
+BIND_A24A['%s-%s' % (dbse, 19)] =  -0.534
+BIND_A24A['%s-%s' % (dbse, 20)] =  -0.397
+BIND_A24A['%s-%s' % (dbse, 21)] =  -0.347
+BIND_A24A['%s-%s' % (dbse, 22)] =   0.835
+BIND_A24A['%s-%s' % (dbse, 23)] =   0.945
+BIND_A24A['%s-%s' % (dbse, 24)] =   1.131
 # A24B: Highest extrapolated CP CCSD(T) values (q5 or 56)
-BIND_CDS = {}
-BIND_CDS['%s-%s' % (dbse,  1)] =  -6.506  # 56
-BIND_CDS['%s-%s' % (dbse,  2)] =  -5.015  # 56
-BIND_CDS['%s-%s' % (dbse,  3)] =  -4.751  # 56
-BIND_CDS['%s-%s' % (dbse,  4)] =  -4.592  # 56
-BIND_CDS['%s-%s' % (dbse,  5)] =  -3.142  # 56
-BIND_CDS['%s-%s' % (dbse,  6)] =  -1.661  # 56
-BIND_CDS['%s-%s' % (dbse,  7)] =  -0.767
-BIND_CDS['%s-%s' % (dbse,  8)] =  -0.665  # 56
-BIND_CDS['%s-%s' % (dbse,  9)] =  -4.565
-BIND_CDS['%s-%s' % (dbse, 10)] =  -2.564
-BIND_CDS['%s-%s' % (dbse, 11)] =  -1.626
-BIND_CDS['%s-%s' % (dbse, 12)] =  -1.527
-BIND_CDS['%s-%s' % (dbse, 13)] =  -1.377
-BIND_CDS['%s-%s' % (dbse, 14)] =  -1.094
-BIND_CDS['%s-%s' % (dbse, 15)] =  -0.504
-BIND_CDS['%s-%s' % (dbse, 16)] =  -1.493
-BIND_CDS['%s-%s' % (dbse, 17)] =  -0.830
-BIND_CDS['%s-%s' % (dbse, 18)] =  -0.609
-BIND_CDS['%s-%s' % (dbse, 19)] =  -0.534
-BIND_CDS['%s-%s' % (dbse, 20)] =  -0.406  # 56
-BIND_CDS['%s-%s' % (dbse, 21)] =  -0.354  # 56
-BIND_CDS['%s-%s' % (dbse, 22)] =   0.818
-BIND_CDS['%s-%s' % (dbse, 23)] =   0.930
-BIND_CDS['%s-%s' % (dbse, 24)] =   1.115
+BIND_A24B = {}
+BIND_A24B['%s-%s' % (dbse,  1)] =  -6.506  # 56
+BIND_A24B['%s-%s' % (dbse,  2)] =  -5.015  # 56
+BIND_A24B['%s-%s' % (dbse,  3)] =  -4.751  # 56
+BIND_A24B['%s-%s' % (dbse,  4)] =  -4.592  # 56
+BIND_A24B['%s-%s' % (dbse,  5)] =  -3.142  # 56
+BIND_A24B['%s-%s' % (dbse,  6)] =  -1.661  # 56
+BIND_A24B['%s-%s' % (dbse,  7)] =  -0.767
+BIND_A24B['%s-%s' % (dbse,  8)] =  -0.665  # 56
+BIND_A24B['%s-%s' % (dbse,  9)] =  -4.565
+BIND_A24B['%s-%s' % (dbse, 10)] =  -2.564
+BIND_A24B['%s-%s' % (dbse, 11)] =  -1.626
+BIND_A24B['%s-%s' % (dbse, 12)] =  -1.527
+BIND_A24B['%s-%s' % (dbse, 13)] =  -1.377
+BIND_A24B['%s-%s' % (dbse, 14)] =  -1.094
+BIND_A24B['%s-%s' % (dbse, 15)] =  -0.504
+BIND_A24B['%s-%s' % (dbse, 16)] =  -1.493
+BIND_A24B['%s-%s' % (dbse, 17)] =  -0.830
+BIND_A24B['%s-%s' % (dbse, 18)] =  -0.609
+BIND_A24B['%s-%s' % (dbse, 19)] =  -0.534
+BIND_A24B['%s-%s' % (dbse, 20)] =  -0.406  # 56
+BIND_A24B['%s-%s' % (dbse, 21)] =  -0.354  # 56
+BIND_A24B['%s-%s' % (dbse, 22)] =   0.818
+BIND_A24B['%s-%s' % (dbse, 23)] =   0.930
+BIND_A24B['%s-%s' % (dbse, 24)] =   1.115
+# A24C: Includes (Q), core, rel corrections PCCP 17 19268 (2015)
+BIND_A24C = {}
+BIND_A24C['%s-%s' % (dbse,  1)] =  -6.546
+BIND_A24C['%s-%s' % (dbse,  2)] =  -5.036
+BIND_A24C['%s-%s' % (dbse,  3)] =  -4.769
+BIND_A24C['%s-%s' % (dbse,  4)] =  -4.585
+BIND_A24C['%s-%s' % (dbse,  5)] =  -3.169
+BIND_A24C['%s-%s' % (dbse,  6)] =  -1.662
+BIND_A24C['%s-%s' % (dbse,  7)] =  -0.779
+BIND_A24C['%s-%s' % (dbse,  8)] =  -0.681
+BIND_A24C['%s-%s' % (dbse,  9)] =  -4.515
+BIND_A24C['%s-%s' % (dbse, 10)] =  -2.586
+BIND_A24C['%s-%s' % (dbse, 11)] =  -1.634
+BIND_A24C['%s-%s' % (dbse, 12)] =  -1.538
+BIND_A24C['%s-%s' % (dbse, 13)] =  -1.396
+BIND_A24C['%s-%s' % (dbse, 14)] =  -1.110
+BIND_A24C['%s-%s' % (dbse, 15)] =  -0.518
+BIND_A24C['%s-%s' % (dbse, 16)] =  -1.522
+BIND_A24C['%s-%s' % (dbse, 17)] =  -0.845
+BIND_A24C['%s-%s' % (dbse, 18)] =  -0.618
+BIND_A24C['%s-%s' % (dbse, 19)] =  -0.542
+BIND_A24C['%s-%s' % (dbse, 20)] =  -0.405
+BIND_A24C['%s-%s' % (dbse, 21)] =  -0.356
+BIND_A24C['%s-%s' % (dbse, 22)] =   0.801
+BIND_A24C['%s-%s' % (dbse, 23)] =   0.909
+BIND_A24C['%s-%s' % (dbse, 24)] =   1.097
 # Set default
-BIND = BIND_CDS
+BIND = BIND_A24B
+# Reference information
+BINDINFO_A240 = {}
+BINDINFO_A24A = {}
+BINDINFO_A24B = {}
+BINDINFO_A24C = {}
+for rxn in HRXN:
+    # A24-0: HF/aug-cc-pV5Z + D:CCSD(T)/aug-cc-pV[TQ5]Z + D:(Q)/6-31G**(0.25,0.15) + DKH4/aug-cc-pCVQZ-DK + CCSD(T)/aug-cc-pCV[TQ]Z(ae - fc)
+    BINDINFO_A240['%s-%s' % (dbse, rxn)] = {'citation': 'a240', 'method': 'CCSDTQ'}
+    if rxn in [1, 2, 3, 4, 5, 6, 8, 20, 21]:
+        BINDINFO_A24A['%s-%s' % (dbse, rxn)] = {'citation': 'dilabio', 'method': 'CCSDT', 'mode': 'ave', 'basis': 'a56z'}
+        BINDINFO_A24B['%s-%s' % (dbse, rxn)] = {'citation': 'dilabio', 'method': 'CCSDT', 'mode': 'CP', 'basis': 'a56z'}
+    else:
+        BINDINFO_A24A['%s-%s' % (dbse, rxn)] = {'citation': 'dilabio', 'method': 'CCSDT', 'mode': 'ave', 'basis': 'aq5z'}
+        BINDINFO_A24B['%s-%s' % (dbse, rxn)] = {'citation': 'dilabio', 'method': 'CCSDT', 'mode': 'CP', 'basis': 'aq5z'}
+    # A24C: A24B + D:(Q)/aTZ (A24-2, 4, 5, 19; could be aDTZ?) /aDZ (1, 6-8, 10-18, 20-24) /None (3, 9) + relativisic(A24-0) + core(A24-0)
+    BINDINFO_A24C['%s-%s' % (dbse, rxn)] = {'citation': 'a24c', 'method': 'CCSDTQ'}
 
 # <<< Comment Lines >>>
 TAGL = {}
@@ -713,107 +761,3 @@ for rxn in HRXN:
     GEOS['%s-%s-monoB-CP'   % (dbse, rxn)] = GEOS['%s-%s-dimer' % (dbse, rxn)].extract_fragments(2, 1)
 
 #########################################################################
-
-# <<< Supplementary Quantum Chemical Results >>>
-DATA = {}
-# SAPT is 2+(3)/aTZ
-DATA['SAPT ELST ENERGY'] = {}
-DATA['SAPT ELST ENERGY']['A24-1'  ] = -10.9952  
-DATA['SAPT ELST ENERGY']['A24-2'  ] =  -7.8662   
-DATA['SAPT ELST ENERGY']['A24-3'  ] =  -5.9005   
-DATA['SAPT ELST ENERGY']['A24-4'  ] =  -6.3437   
-DATA['SAPT ELST ENERGY']['A24-5'  ] =  -4.7390   
-DATA['SAPT ELST ENERGY']['A24-6'  ] =  -1.3801   
-DATA['SAPT ELST ENERGY']['A24-7'  ] =  -0.9488   
-DATA['SAPT ELST ENERGY']['A24-8'  ] =  -0.6964   
-DATA['SAPT ELST ENERGY']['A24-9'  ] =  -6.5363   
-DATA['SAPT ELST ENERGY']['A24-10' ] =  -3.4520   
-DATA['SAPT ELST ENERGY']['A24-11' ] =  -1.7046   
-DATA['SAPT ELST ENERGY']['A24-12' ] =  -1.8266   
-DATA['SAPT ELST ENERGY']['A24-13' ] =  -1.6755   
-DATA['SAPT ELST ENERGY']['A24-14' ] =  -0.8553   
-DATA['SAPT ELST ENERGY']['A24-15' ] =  -0.4206   
-DATA['SAPT ELST ENERGY']['A24-16' ] =  -1.5114   
-DATA['SAPT ELST ENERGY']['A24-17' ] =  -0.3610   
-DATA['SAPT ELST ENERGY']['A24-18' ] =  -0.2355   
-DATA['SAPT ELST ENERGY']['A24-19' ] =  -0.2046   
-DATA['SAPT ELST ENERGY']['A24-20' ] =  -0.1800   
-DATA['SAPT ELST ENERGY']['A24-21' ] =  -0.2440   
-DATA['SAPT ELST ENERGY']['A24-22' ] =  -0.3588   
-DATA['SAPT ELST ENERGY']['A24-23' ] =  -0.5573   
-DATA['SAPT ELST ENERGY']['A24-24' ] =   0.1900    
-DATA['SAPT EXCH ENERGY'] = {}
-DATA['SAPT EXCH ENERGY']['A24-1'  ] =  11.4178 
-DATA['SAPT EXCH ENERGY']['A24-2'  ] =   7.7070  
-DATA['SAPT EXCH ENERGY']['A24-3'  ] =   4.1485  
-DATA['SAPT EXCH ENERGY']['A24-4'  ] =   6.1308  
-DATA['SAPT EXCH ENERGY']['A24-5'  ] =   4.5393  
-DATA['SAPT EXCH ENERGY']['A24-6'  ] =   2.5482  
-DATA['SAPT EXCH ENERGY']['A24-7'  ] =   1.4475  
-DATA['SAPT EXCH ENERGY']['A24-8'  ] =   1.0758  
-DATA['SAPT EXCH ENERGY']['A24-9'  ] =   8.5528  
-DATA['SAPT EXCH ENERGY']['A24-10' ] =   4.4582  
-DATA['SAPT EXCH ENERGY']['A24-11' ] =   2.5956  
-DATA['SAPT EXCH ENERGY']['A24-12' ] =   2.1004  
-DATA['SAPT EXCH ENERGY']['A24-13' ] =   2.3944  
-DATA['SAPT EXCH ENERGY']['A24-14' ] =   2.1490  
-DATA['SAPT EXCH ENERGY']['A24-15' ] =   0.9412  
-DATA['SAPT EXCH ENERGY']['A24-16' ] =   3.9267  
-DATA['SAPT EXCH ENERGY']['A24-17' ] =   1.2388  
-DATA['SAPT EXCH ENERGY']['A24-18' ] =   0.8834  
-DATA['SAPT EXCH ENERGY']['A24-19' ] =   0.7786  
-DATA['SAPT EXCH ENERGY']['A24-20' ] =   0.5944  
-DATA['SAPT EXCH ENERGY']['A24-21' ] =   0.7325  
-DATA['SAPT EXCH ENERGY']['A24-22' ] =   3.7451  
-DATA['SAPT EXCH ENERGY']['A24-23' ] =   4.5375  
-DATA['SAPT EXCH ENERGY']['A24-24' ] =   3.0958  
-DATA['SAPT IND ENERGY'] = {}
-DATA['SAPT IND ENERGY']['A24-1'   ] =  -3.7757 
-DATA['SAPT IND ENERGY']['A24-2'   ] =  -2.3513 
-DATA['SAPT IND ENERGY']['A24-3'   ] =  -1.5374 
-DATA['SAPT IND ENERGY']['A24-4'   ] =  -2.3488 
-DATA['SAPT IND ENERGY']['A24-5'   ] =  -0.8652 
-DATA['SAPT IND ENERGY']['A24-6'   ] =  -1.2460 
-DATA['SAPT IND ENERGY']['A24-7'   ] =  -0.3803 
-DATA['SAPT IND ENERGY']['A24-8'   ] =  -0.2697 
-DATA['SAPT IND ENERGY']['A24-9'   ] =  -2.3790 
-DATA['SAPT IND ENERGY']['A24-10'  ] =  -1.2827 
-DATA['SAPT IND ENERGY']['A24-11'  ] =  -0.4916 
-DATA['SAPT IND ENERGY']['A24-12'  ] =  -0.5454 
-DATA['SAPT IND ENERGY']['A24-13'  ] =  -0.4876 
-DATA['SAPT IND ENERGY']['A24-14'  ] =  -0.3071 
-DATA['SAPT IND ENERGY']['A24-15'  ] =  -0.1305 
-DATA['SAPT IND ENERGY']['A24-16'  ] =  -1.0811 
-DATA['SAPT IND ENERGY']['A24-17'  ] =  -0.0717 
-DATA['SAPT IND ENERGY']['A24-18'  ] =  -0.0446 
-DATA['SAPT IND ENERGY']['A24-19'  ] =  -0.0379 
-DATA['SAPT IND ENERGY']['A24-20'  ] =  -0.0277 
-DATA['SAPT IND ENERGY']['A24-21'  ] =  -0.0498 
-DATA['SAPT IND ENERGY']['A24-22'  ] =  -0.2491 
-DATA['SAPT IND ENERGY']['A24-23'  ] =  -0.2845 
-DATA['SAPT IND ENERGY']['A24-24'  ] =  -0.2110 
-DATA['SAPT DISP ENERGY'] = {}
-DATA['SAPT DISP ENERGY']['A24-1'  ] =  -3.0320 
-DATA['SAPT DISP ENERGY']['A24-2'  ] =  -2.3413 
-DATA['SAPT DISP ENERGY']['A24-3'  ] =  -1.7291 
-DATA['SAPT DISP ENERGY']['A24-4'  ] =  -1.7862 
-DATA['SAPT DISP ENERGY']['A24-5'  ] =  -2.0153 
-DATA['SAPT DISP ENERGY']['A24-6'  ] =  -1.4883 
-DATA['SAPT DISP ENERGY']['A24-7'  ] =  -0.9255 
-DATA['SAPT DISP ENERGY']['A24-8'  ] =  -0.7975 
-DATA['SAPT DISP ENERGY']['A24-9'  ] =  -4.1971 
-DATA['SAPT DISP ENERGY']['A24-10' ] =  -2.0724 
-DATA['SAPT DISP ENERGY']['A24-11' ] =  -2.0683 
-DATA['SAPT DISP ENERGY']['A24-12' ] =  -1.3085 
-DATA['SAPT DISP ENERGY']['A24-13' ] =  -1.5054 
-DATA['SAPT DISP ENERGY']['A24-14' ] =  -2.0093 
-DATA['SAPT DISP ENERGY']['A24-15' ] =  -0.8700 
-DATA['SAPT DISP ENERGY']['A24-16' ] =  -2.6413 
-DATA['SAPT DISP ENERGY']['A24-17' ] =  -1.6425 
-DATA['SAPT DISP ENERGY']['A24-18' ] =  -1.2229 
-DATA['SAPT DISP ENERGY']['A24-19' ] =  -1.0748 
-DATA['SAPT DISP ENERGY']['A24-20' ] =  -0.7567 
-DATA['SAPT DISP ENERGY']['A24-21' ] =  -0.7133 
-DATA['SAPT DISP ENERGY']['A24-22' ] =  -2.0822 
-DATA['SAPT DISP ENERGY']['A24-23' ] =  -2.3755 
-DATA['SAPT DISP ENERGY']['A24-24' ] =  -1.8418 

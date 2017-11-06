@@ -1,3 +1,31 @@
+#
+# @BEGIN LICENSE
+#
+# QCDB: quantum chemistry common driver and databases
+#
+# Copyright (c) 2011-2017 The QCDB Developers.
+#
+# The copyrights for code used from other parties are included in
+# the corresponding files.
+#
+# This file is part of QCDB.
+#
+# QCDB is free software; you can redistribute it and/or modify
+# it under the terms of the GNU Lesser General Public License as published by
+# the Free Software Foundation, version 3.
+#
+# QCDB is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU Lesser General Public License for more details.
+#
+# You should have received a copy of the GNU Lesser General Public License along
+# with QCDB; if not, write to the Free Software Foundation, Inc.,
+# 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+#
+# @END LICENSE
+#
+
 from __future__ import absolute_import
 from __future__ import print_function
 try:
@@ -76,7 +104,7 @@ class QCEssential(object):
 
 
 class Publication(QCEssential):
-    """Specialization of :pyclass:`QCEssential` for computational chemistry 
+    """Specialization of :pyclass:`QCEssential` for computational chemistry
     publications, presumably containing many quantum chemistry results.
 
     """
@@ -210,16 +238,52 @@ _tlist = [
     Publication('achc', doi='10.1021/acs.jctc.5b00588', dsdbid='', owner='TMP',
         fullname="""Assessment of Empirical Models versus High-Accuracy Ab Initio Methods for Nucleobase Stacking: Evaluating the Importance of Charge Penetration"""),
     Publication('pt2uncp', doi='', dsdbid='', owner='LAB', fullname=''),
-    Publication('dfit', doi='', dsdbid='', owner='DGAS', fullname=''),
-    Publication('merz3', doi='', dsdbid='', owner='LAB', fullname=''),
-    Publication('bfdbmm', doi='', dsdbid='', owner='LAB', fullname=''),
-    Publication('saptmisc', doi='', dsdbid='', owner='', fullname=''),
-    Publication('bfdbdft', doi='', dsdbid='', owner='', fullname=''),
+    Publication('dfit', doi='10.1021/acs.jpclett.6b00780', dsdbid='Smith:2016:2197', owner='DGAS',
+        fullname="""Revised Damping Parameters for the D3 Dispersion Correction to Density Functional Theory. D. G. A. Smith, L. A. Burns, K. Patkowski, C. D. Sherrill, J. Phys. Chem. Lett. 7 2197-2203 (2016)"""),
+    Publication('merz3', doi='', dsdbid='', owner='LAB',
+        fullname="""The BioFragment Database (BFDb): An Open-Data Platform for Computational Chemistry Analysis of Noncovalent Interactions. L. A. Burns, J. C. Faver, Z. Zheng, M. S. Marshall, D. G. A. Smith, K. Vanommeslaeghe, A. D. MacKerell, K. M. Merz, and C. D. Sherrill, J. Chem. Phys. in press (2017)"""),
     Publication('silver', doi='', dsdbid='', owner='', fullname=''),
     Publication('anon', doi='', dsdbid='', owner='', fullname=''),
     Publication('f12dilabio', doi='', dsdbid='', owner='', fullname=''),
-    Publication('dilabioextras',doi='', dsdbid='', owner='', fullname=''),
-    Publication('shimizu',doi='',dsdbid='',owner='',fullname=''),
+    Publication('dilabioextras', doi='', dsdbid='', owner='', fullname=''),
+    Publication('shimizu', doi='', dsdbid='', owner='', fullname=''),
+    Publication('1hsg', doi='10.1021/ct100563b', dsdbid='Faver:2011:790', owner='LAB',
+        fullname="""Formal Estimation of Errors in Computed Absolute Interaction Energies of Protein-Ligand Complexes. J. C. Faver, M. L. Benson, X. He, B. P. Roberts, B. Wang, M. S. Marshall, M. R. Kennedy, C. D. Sherrill, and K. M. Merz, J. Chem. Theory Comput. 7, 790--797 (2011)"""),
+    Publication('1ubq', doi='10.1371/journal.pone.0018868', dsdbid='Faver:2011:e18868', owner='LAB',
+        fullname="""The Energy Computation Paradox and Ab Initio Protein Folding. J. C. Faver, M. L. Benson, X. He, B. P. Roberts, B. Wang, M. S. Marshall, C. D. Sherrill, K. M. Merz, PLoS ONE 6 e18868 (2011)"""),
+    Publication('bfdbefp', doi='', dsdbid='', owner='', fullname=''),
+    Publication('gmtkn24', doi='10.1021/ct900489g', dsdbid='Goerigk:2010:107', owner='LAB',
+        fullname="""A General Database for Main Group Thermochemistry, Kinetics, and Noncovalent Interactions --- Assessment of Common and Reparameterized (meta-)GGA Density Functionals. L. Goerigk, S. Grimme, J. Chem. Theory Comput. 6 107-126 (2010)"""),
+    Publication('pconf0', doi='10.1002/chem.200500465', dsdbid='Reha:2005:6803', owner='LAB',
+        fullname="""Structure and IR Spectrum of Phenylalanyl--Glycyl--Glycine Tripetide in the Gas-Phase: IR/UV Experiments, Ab Initio Quantum Chemical Calculations, and Molecular Dynamic Simulations. D. Reha, H. Valdes, J. Vondrasek, P. Hobza, A. Abu-Riziq, B. Crews, M. S. de Vries, Chem. Eur. J. 11 6803-6817 (2005)"""),
+    Publication('aconf0', doi='10.1021/jp903640h', dsdbid='Gruzman:2009:11974', owner='LAB',
+        fullname="""Performance of Ab Initio and Density Functional Methods for Conformational Equilibria of C_{n}H_{2n+2} Alkane Isomers (n = 4-8). D. Gruzman, A. Karton, J. M. L. Martin, J. Phys. Chem. A 113 11974-11983 (2009)"""),
+    Publication('cyconf0', doi='10.1021/ct900005c', dsdbid='Wilke:2009:1511', owner='LAB',
+        fullname="""Conformers of Gaseous Cysteine. J. J. Wilke, M. C. Lind, H. F. Schaefer III, A. G. Csaszar, W. D. Allen, J. Chem. Theory Comput. 5 1511-1523 (2009)"""),
+    Publication('bzbzcurve', doi='10.1021/jp9034375', dsdbid='Sherrill:2009:10146', owner='LAB',
+        fullname="""An Assessment of Theoretical Methods for Nonbonded Interactions: Comparison to Complete Basis Set Limit Coupled-Cluster Potential Energy Curves for the Benzene Dimer, the Methane Dimer, Benzene-Methane, and Benzene-H2S. C. D. Sherrill, T. Takatani, E. G. Hohenstein, J. Phys. Chem. A 113 10146-10159 (2009)"""),
+    Publication('scsmp2nci', doi='10.1039/b709669k', dsdbid='Takatani:2007:6106', owner='LAB',
+        fullname="""Performance of Spin-component-scaled Moller-Plesset Theory (SCS-MP2) for Potential Energy Curves of Noncovalent Interactions. T. Takatani, C. D. Sherrill, Phys. Chem. Chem. Phys
+. 9 6106-6114 (2007)"""),
+    Publication('bzpypypy', doi='10.1021/jp809062x', dsdbid='Hohenstein:2009:878', owner='LAB',
+        fullname="""Effects of Heteroatoms On Aromatic pi-pi Interactions: Benzene-Pyridine and Pyridine Dimer. E. G. Hohenstein, C. D. Sherrill, J. Phys. Chem. A 113 878-886 (2009)"""),
+    Publication('s22a', doi='10.1063/1.3378024', dsdbid='Takatani:2010:144104', owner='LAB',
+        fullname="""Basis Set Consistent Revision of the S22 Test Set of Noncovalent Interaction Energies. T. Takatani, E. G. Hohenstein, M. Malagoli, M. S. Marshall, C. D. Sherrill, J. Chem. Phys. 132 144104 (2010)"""),
+    Publication('s22jsch', doi='10.1039/b600027d', dsdbid='Jurecka:2006:1985', owner='LAB',
+        fullname="""Benchmark Database of Accurate (MP2 and CCSD(T) Complete Basis Set Limit) Interaction Energies of Small Model Complexes, DNA Base Pairs, and Amino Acid Pairs. P. Jurecka, J. Sponer, J. Cerny, P. Hobza, Phys. Chem. Chem. Phys. 8 1985-1993 (2006)"""),
+    Publication('a24c', doi='10.1039/c5cp03151f', dsdbid='Rezac:2015:19268', owner='LAB',
+        fullname="""Extensions and Applications of the A24 Data Set of Accurate Interactions Energies. J. Rezac, M Dubecky, P Jurecka, P Hobza, Phys. Chem. Chem. Phys. 17 19268 (2015)"""),
+    Publication('a240', doi='10.1021/ct400057w', dsdbid='Rezac:2013:2151', owner='LAB',
+        fullname="""Describing Noncovalent Interactions Beyond the Common Approximations: How Accurate Is the Gold Standard, CCSD(T) at the Complete Basis Set Limit? J. Rezac, P. Hobza, J. Chem. Theory Comput. 9 2151-2155 (2013)"""),
+    Publication('hbc6', doi='10.1021/ct100469b', dsdbid='Thanthiriwatte:2011:88', owner='LAB',
+        fullname="""Assessment of the Performance of DFT and DFT-D Methods for Describing Distance Dependence of Hydrogen-Bonded Interactions. K. S. Thanthiriwatte, E. G. Hohenstein, L. A. Burns, C. D. Sherrill, J. Chem. Theory Comput. 7 88-96 (2011)"""),
+    Publication('s22by5', doi='10.1021/ct1002253', dsdbid='Grafova:2010:2365', owner='LAB',
+        fullname="""Comparative Study of Selected Wave Function and Density Functional Methods for Noncovalent Interaction Energy Calculations Using the Extended S22 Data Set. L. Grafova, M. Pitonak, J. Rezac, P. Hobza, J. Chem. Theory Comput. 6 2365-2376 (2010)"""),
+    Publication('s660', doi='10.1021/ct2002946', dsdbid='Rezac:2011:2427', owner='LAB',
+        fullname="""S66: A Well-Balanced Database of Benchmark Interaction Energies Relevant to Biomolecular Structures. J. Rezac, K. E. Riley, P. Hobza, J. Chem. Theory Comput. 7 2427-2438 (2011)"""),
+    Publication('s66a', doi='10.1021/ct200523a', dsdbid='Rezac:2011:3466', owner='LAB',
+        fullname="""Extensions of the S66 Data Set: More Accurate Interaction Energies and Angular-Displaced Nonequilibrium Geometries. J. Rezac, K. E. Riley, P. Hobza, J. Chem. Theory Comput. 7 3466-3470 (2011)"""),
+    Publication('cdsgroup', doi='', dsdbid='', owner='LAB', fullname='Sherrill group, unpublished'),
 ]
 pubs = {}
 for item in _tlist:
@@ -283,6 +347,19 @@ _tlist = [
         build=[None, None, ['aqz', 'atqz', 'adz']]),
     BasisSet('aq5zadz',    fullname='[aQ5Z; D:aDZ]', latex="""[aQ5Z; $\delta$:aDZ]""",
         build=[None, None, ['a5z', 'aq5z', 'adz']]),
+    BasisSet('tqzdz',    fullname='[TQZ; D:DZ]', latex="""[TQZ; $\delta$:DZ]""",
+        build=[None, None, ['z', 'tqz', 'dz']]),
+    BasisSet('q5ztz',    fullname='[Q5Z; D:TZ]', latex="""[Q5Z; $\delta$:TZ]""",
+        build=[None, None, ['z', 'q5z', 'tz']]),
+    BasisSet('q5zqz',    fullname='[Q5Z; D:QZ]', latex="""[Q5Z; $\delta$:QZ]""",
+        build=[None, None, ['z', 'q5z', 'qz']]),
+    BasisSet('tzfd',       fullname='cc-pVTZ(-fd)'),  # cc-pVTZ with f- and less-diffuse d-functions removed from heavy and d- and less-diffuse p-functions removed from H
+    BasisSet('tqztzfd',    fullname='[TQZ; D:TZ(-fd)]', latex="""[TQZ; $\delta$:TZ(-fd)]""",
+        build=[None, None, ['z', 'tqz', 'tzfd']]),
+    BasisSet('atqztzfd',    fullname='[aTQZ; D:TZ(-fd)]', latex="""[aTQZ; $\delta$:TZ(-fd)]""",
+        build=[None, None, ['z', 'atqz', 'tzfd']]),
+    BasisSet('q5ztzfd',    fullname='[Q5Z; D:TZ(-fd)]', latex="""[Q5Z; $\delta$:TZ(-fd)]""",
+        build=[None, None, ['z', 'q5z', 'tzfd']]),
     BasisSet('atzdtz',     fullname='[aTZ; D:DTZ]', latex="""[aTZ; $\delta$:DTZ]""",
         build=[None, None, ['atz', 'atz', 'dtz']]),
     BasisSet('atqzdtz',    fullname='[aTQZ; D:DTZ]', latex="""[aTQZ; $\delta$:DTZ]""",
@@ -321,7 +398,7 @@ _tlist = [
         build=[None, None, ['a5z', 'aq5z', 'aqz']]),
     BasisSet('a56za5z',    fullname='[a56Z, D:a5Z]', latex="""[a56Z: $\delta$:a5Z]""",
         build=[None, None, ['a6z', 'a56z', 'a5z']]),
-    BasisSet('tqz631gs025',fullname='[TQZ; D:631G*(0.25)]', latex="""[TQZ; $\delta$:631gs025]""",
+    BasisSet('tqz631gs025',fullname='[TQZ; D:6-31G*(0.25)]', latex="""[TQZ; $\delta$:6-31G$^*$(0.25)]""",
         build=[None, None, ['qz', 'tqz', '631gs025']]),
     BasisSet('dzf12',      fullname='cc-pVDZ-F12'),
     BasisSet('tzf12',      fullname='cc-pVTZ-F12'),
@@ -349,6 +426,20 @@ _tlist = [
     BasisSet('def2qzvp',   fullname='def2-QZVP'),
     BasisSet('def2msvp',   fullname='def2-mSVP'),
     BasisSet('na',         fullname='no applicable basis'),
+    BasisSet('atqz_atqzatz', fullname='[aTQZ_; aTQZ; D:aTZ]', latex="""[aTQZ_; aTQZ; $\delta$:aTZ]""",
+        build=[None, None, ['atqz', 'atqz', 'atz']]),
+    BasisSet('aq5z_aq5zatz', fullname='[aQ5Z_; aQ5Z; D:aTZ]', latex="""[aQ5Z_; aQ5Z; $\delta$:aTZ]""",
+        build=[None, None, ['aq5z', 'aq5z', 'atz']]),
+    BasisSet('aq5z_aq5zaqz', fullname='[aQ5Z_; aQ5Z; D:aQZ]', latex="""[aQ5Z_; aQ5Z; $\delta$:aQZ]""",
+        build=[None, None, ['aq5z', 'aq5z', 'aqz']]),
+    BasisSet('atq5dz_aq5dzatdz', fullname='[aTQ5dZ_; aQ5dZ; D:aTdZ]', latex="""[aTQ5dZ_; aQ5dZ; $\delta$:aTdZ]""",
+        build=[None, None, ['atq5dz', 'aq5dz', 'atdz', 'atdz']]),  # untested [HF: tq5; MP2: q5; CCSD: t; (T): t]/aug-cc-pV(X+d)Z
+    BasisSet('adtz_adtz', fullname='[aDTZ_; aDTZ]', latex="""[aDTZ_; aDTZ]""",
+        build=[None, None, ['adtz', 'adtz']]),  # untested build
+    BasisSet('adtz_adtz631gs025', fullname='[aDTZ_; aDTZ; D:6-31G*(0.25)]', latex="""[aDTZ_; aDTZ; $\delta$:6-31G$^*$(0.25)]""",
+        build=[None, None, ['adtz', 'adtz', '631gs025']]),
+    BasisSet('atqz_atqz631gs025', fullname='[aTQZ_; aTQZ; D:6-31G*(0.25)]', latex="""[aTQZ_; aTQZ; $\delta$:6-31G$^*$(0.25)]""",
+        build=[None, None, ['atqz', 'atqz', '631gs025']]),
 ]
 bases = {}
 for item in _tlist:

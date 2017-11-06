@@ -1,10 +1,36 @@
+#
+# @BEGIN LICENSE
+#
+# QCDB: quantum chemistry common driver and databases
+#
+# Copyright (c) 2011-2017 The QCDB Developers.
+#
+# The copyrights for code used from other parties are included in
+# the corresponding files.
+#
+# This file is part of QCDB.
+#
+# QCDB is free software; you can redistribute it and/or modify
+# it under the terms of the GNU Lesser General Public License as published by
+# the Free Software Foundation, version 3.
+#
+# QCDB is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU Lesser General Public License for more details.
+#
+# You should have received a copy of the GNU Lesser General Public License along
+# with QCDB; if not, write to the Free Software Foundation, Inc.,
+# 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+#
+# @END LICENSE
+#
+
 """
-| Database of <description of members and reference energy type>.
-| Geometries from <Reference>.
-http://www.thch.uni-bonn.de/tc/downloads/GMTKN/GMTKN30/ACONF.html
-| Reference interaction energies from <Reference>.
-Taken from Gruzman, D.; Karton, A.; Martin J. M. L. J. Phys. Chem. A 2009, 113, 11974-11983.
-(W1hval reference values); all values are in kcal/mol.
+| Database (J. Martin) of conformation energies for alkanes.
+| Geometries and reference energies from http://www.thch.uni-bonn.de/tc/downloads/GMTKN/GMTKN30/ACONF.html .
+| Taken from Gruzman, D.; Karton, A.; Martin J. M. L. J. Phys. Chem. A 2009, 113, 11974-11983.
+| (W1hval reference values); all values are in kcal/mol.
 
 
 - **benchmark**
@@ -93,21 +119,31 @@ RXNM['%s-%s'            % (dbse, '15'                    )] = dict(zip(ACTV['%s-
 
 # <<< Reference Values [kcal/mol] >>>
 BIND = {}
-BIND['%s-%s'            % (dbse, '1'                     )] =    0.598
-BIND['%s-%s'            % (dbse, '2'                     )] =    0.614
-BIND['%s-%s'            % (dbse, '3'                     )] =    0.961
-BIND['%s-%s'            % (dbse, '4'                     )] =    2.813
-BIND['%s-%s'            % (dbse, '5'                     )] =    0.595
-BIND['%s-%s'            % (dbse, '6'                     )] =    0.604
-BIND['%s-%s'            % (dbse, '7'                     )] =    0.934
-BIND['%s-%s'            % (dbse, '8'                     )] =    1.178
-BIND['%s-%s'            % (dbse, '9'                     )] =    1.302
-BIND['%s-%s'            % (dbse, '10'                    )] =    1.250
-BIND['%s-%s'            % (dbse, '11'                    )] =    2.632
-BIND['%s-%s'            % (dbse, '12'                    )] =    2.740
-BIND['%s-%s'            % (dbse, '13'                    )] =    3.283
-BIND['%s-%s'            % (dbse, '14'                    )] =    3.083
-BIND['%s-%s'            % (dbse, '15'                    )] =    4.925
+# Original publication
+# Current revision
+BIND_ACONF0 = {}
+BIND_ACONF0['%s-%s'            % (dbse, '1'                     )] =    0.598
+BIND_ACONF0['%s-%s'            % (dbse, '2'                     )] =    0.614
+BIND_ACONF0['%s-%s'            % (dbse, '3'                     )] =    0.961
+BIND_ACONF0['%s-%s'            % (dbse, '4'                     )] =    2.813
+BIND_ACONF0['%s-%s'            % (dbse, '5'                     )] =    0.595
+BIND_ACONF0['%s-%s'            % (dbse, '6'                     )] =    0.604
+BIND_ACONF0['%s-%s'            % (dbse, '7'                     )] =    0.934
+BIND_ACONF0['%s-%s'            % (dbse, '8'                     )] =    1.178
+BIND_ACONF0['%s-%s'            % (dbse, '9'                     )] =    1.302
+BIND_ACONF0['%s-%s'            % (dbse, '10'                    )] =    1.250
+BIND_ACONF0['%s-%s'            % (dbse, '11'                    )] =    2.632
+BIND_ACONF0['%s-%s'            % (dbse, '12'                    )] =    2.740
+BIND_ACONF0['%s-%s'            % (dbse, '13'                    )] =    3.283
+BIND_ACONF0['%s-%s'            % (dbse, '14'                    )] =    3.083
+BIND_ACONF0['%s-%s'            % (dbse, '15'                    )] =    4.925
+# Set default
+BIND = BIND_ACONF0
+# Reference information
+BINDINFO_ACONF0 = {}
+for rxn in HRXN:
+    # Table 2
+    BINDINFO_ACONF0['%s-%s' % (dbse, rxn)] = {'citation': 'aconf0'}  # W1 ~= CCSD/TQZ + (T)/DTZ
 
 # <<< Comment Lines >>>
 TAGL = {}
@@ -145,7 +181,7 @@ TAGL['%s-%s-reagent'    % (dbse, 'P_GX'                  )] = """Pentane gauche,
 TAGL['%s-%s-reagent'    % (dbse, 'P_TG'                  )] = """Pentane trans, gauche"""
 TAGL['%s-%s-reagent'    % (dbse, 'P_TT'                  )] = """Pentane trans, trans"""
 
-TAGL['dbse'] = 'comformation energies for alkanes'
+TAGL['dbse'] = 'conformation energies for alkanes'
 TAGL['default'] = 'entire database'
 
 # <<< Geometry Specification Strings >>>

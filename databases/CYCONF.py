@@ -1,16 +1,44 @@
+#
+# @BEGIN LICENSE
+#
+# QCDB: quantum chemistry common driver and databases
+#
+# Copyright (c) 2011-2017 The QCDB Developers.
+#
+# The copyrights for code used from other parties are included in
+# the corresponding files.
+#
+# This file is part of QCDB.
+#
+# QCDB is free software; you can redistribute it and/or modify
+# it under the terms of the GNU Lesser General Public License as published by
+# the Free Software Foundation, version 3.
+#
+# QCDB is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU Lesser General Public License for more details.
+#
+# You should have received a copy of the GNU Lesser General Public License along
+# with QCDB; if not, write to the Free Software Foundation, Inc.,
+# 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+#
+# @END LICENSE
+#
+
 """
-| Database of <description of members and reference energy type>.
-| Geometries from <Reference>.
+| Database (Schaefer) of conformation energies for cysteine.
+| Geometries and reference energies from
 http://www.thch.uni-bonn.de/tc/downloads/GMTKN/GMTKN30/CYCONF.html
 | Reference interaction energies from <Reference>.
+| Taken from Wilke, J. J.; Lind, M. C.; Schaefer III, H. F.; Csaszar, A. G.; Allen, W. D. J. Chem. Theory Comput. 2009, 5, 1511-1523.
+| (estimated CCSD(T)/CBS); all values are in kcal/mol.
 
 
 - **benchmark**
 
   - ``'<benchmark_name>'`` <Reference>.
   - |dl| ``'<default_benchmark_name>'`` |dr| <Reference>.
-Taken from Wilke, J. J.; Lind, M. C.; Schaefer III, H. F.; Csaszar, A. G.; Allen, W. D. J. Chem. Theory Comput. 2009, 5, 1511-1523.
-(estimated CCSD(T)/CBS); all values are in kcal/mol.
 
 
 - **subset**
@@ -74,42 +102,50 @@ RXNM['%s-%s'            % (dbse, '10'                    )] = dict(zip(ACTV['%s-
 
 # <<< Reference Values [kcal/mol] >>>
 BIND = {}
-BIND['%s-%s'            % (dbse, '1'                     )] =    1.522
-BIND['%s-%s'            % (dbse, '2'                     )] =    1.609
-BIND['%s-%s'            % (dbse, '3'                     )] =    1.948
-BIND['%s-%s'            % (dbse, '4'                     )] =    1.795
-BIND['%s-%s'            % (dbse, '5'                     )] =    2.098
-BIND['%s-%s'            % (dbse, '6'                     )] =    1.933
-BIND['%s-%s'            % (dbse, '7'                     )] =    2.177
-BIND['%s-%s'            % (dbse, '8'                     )] =    2.359
-BIND['%s-%s'            % (dbse, '9'                     )] =    2.562
-BIND['%s-%s'            % (dbse, '10'                    )] =    2.674
+# Original publication
+# Current revision
+BIND_CYCONF0 = {}
+BIND_CYCONF0['%s-%s'            % (dbse, '1'                     )] =    1.522
+BIND_CYCONF0['%s-%s'            % (dbse, '2'                     )] =    1.609
+BIND_CYCONF0['%s-%s'            % (dbse, '3'                     )] =    1.948
+BIND_CYCONF0['%s-%s'            % (dbse, '4'                     )] =    1.795
+BIND_CYCONF0['%s-%s'            % (dbse, '5'                     )] =    2.098
+BIND_CYCONF0['%s-%s'            % (dbse, '6'                     )] =    1.933
+BIND_CYCONF0['%s-%s'            % (dbse, '7'                     )] =    2.177
+BIND_CYCONF0['%s-%s'            % (dbse, '8'                     )] =    2.359
+BIND_CYCONF0['%s-%s'            % (dbse, '9'                     )] =    2.562
+BIND_CYCONF0['%s-%s'            % (dbse, '10'                    )] =    2.674
+# Set default
+BIND = BIND_CYCONF0
+# Reference information
+BINDINFO_CYCONF0 = {}
+for rxn in HRXN:
+    BINDINFO_CYCONF0['%s-%s' % (dbse, rxn)] = {'citation': 'cyconf0', 'method': 'CCSDT', 'mode': 'CP', 'basis': 'atq5dz_aq5dzatdz'}
 
 # <<< Comment Lines >>>
 TAGL = {}
-TAGL['%s-%s'            % (dbse, '1'                     )] = """Reaction 1 """
-TAGL['%s-%s'            % (dbse, '2'                     )] = """Reaction 2 """
-TAGL['%s-%s'            % (dbse, '3'                     )] = """Reaction 3 """
-TAGL['%s-%s'            % (dbse, '4'                     )] = """Reaction 4 """
-TAGL['%s-%s'            % (dbse, '5'                     )] = """Reaction 5 """
-TAGL['%s-%s'            % (dbse, '6'                     )] = """Reaction 6 """
-TAGL['%s-%s'            % (dbse, '7'                     )] = """Reaction 7 """
-TAGL['%s-%s'            % (dbse, '8'                     )] = """Reaction 8 """
-TAGL['%s-%s'            % (dbse, '9'                     )] = """Reaction 9 """
-TAGL['%s-%s'            % (dbse, '10'                    )] = """Reaction 10 """
-TAGL['%s-%s-reagent'    % (dbse, '1'                     )] = """ """
-TAGL['%s-%s-reagent'    % (dbse, '10'                    )] = """ """
-TAGL['%s-%s-reagent'    % (dbse, '11'                    )] = """ """
-TAGL['%s-%s-reagent'    % (dbse, '2'                     )] = """ """
-TAGL['%s-%s-reagent'    % (dbse, '3'                     )] = """ """
-TAGL['%s-%s-reagent'    % (dbse, '4'                     )] = """ """
-TAGL['%s-%s-reagent'    % (dbse, '5'                     )] = """ """
-TAGL['%s-%s-reagent'    % (dbse, '6'                     )] = """ """
-TAGL['%s-%s-reagent'    % (dbse, '7'                     )] = """ """
-TAGL['%s-%s-reagent'    % (dbse, '8'                     )] = """ """
-TAGL['%s-%s-reagent'    % (dbse, '9'                     )] = """ """
-
-TAGL['dbse'] = 'comformation energies for cysteine'
+TAGL['%s-%s'            % (dbse, '1'                     )] = """Conformer II: TTG-TA-:G+ vs. I: TTG+G-A+"""
+TAGL['%s-%s'            % (dbse, '2'                     )] = """Conformer III: CCG+G-A+ vs. I: TTG+G-A+"""
+TAGL['%s-%s'            % (dbse, '3'                     )] = """Conformer IV: CCG+G-C vs. I: TTG+G-A+"""
+TAGL['%s-%s'            % (dbse, '4'                     )] = """Conformer V: CCG-TC vs. I: TTG+G-A+"""
+TAGL['%s-%s'            % (dbse, '5'                     )] = """Conformer VI: TTG+G-G- vs. I: TTG+G-A+"""
+TAGL['%s-%s'            % (dbse, '6'                     )] = """Conformer VII: CA-G+G-A+ vs. I: TTG+G-A+"""
+TAGL['%s-%s'            % (dbse, '7'                     )] = """Conformer VIII: TTG-TT:C vs. I: TTG+G-A+"""
+TAGL['%s-%s'            % (dbse, '8'                     )] = """Conformer IX: TTG-TC vs. I: TTG+G-A+"""
+TAGL['%s-%s'            % (dbse, '9'                     )] = """Conformer X: CG-TG+A+ vs. I: TTG+G-A+"""
+TAGL['%s-%s'            % (dbse, '10'                    )] = """Conformer XI: CTG+G-C vs. I: TTG+G-A+"""
+TAGL['%s-%s-reagent'    % (dbse, '1'                     )] = """Conformer I: TTG+G-A+"""
+TAGL['%s-%s-reagent'    % (dbse, '2'                     )] = """Conformer II: TTG-TA-:G+"""
+TAGL['%s-%s-reagent'    % (dbse, '3'                     )] = """Conformer III: CCG+G-A+"""
+TAGL['%s-%s-reagent'    % (dbse, '4'                     )] = """Conformer IV: CCG+G-C"""
+TAGL['%s-%s-reagent'    % (dbse, '5'                     )] = """Conformer V: CCG-TC"""
+TAGL['%s-%s-reagent'    % (dbse, '6'                     )] = """Conformer VI: TTG+G-G-"""
+TAGL['%s-%s-reagent'    % (dbse, '7'                     )] = """Conformer VII: CA-G+G-A+"""
+TAGL['%s-%s-reagent'    % (dbse, '8'                     )] = """Conformer VIII: TTG-TT:C"""
+TAGL['%s-%s-reagent'    % (dbse, '9'                     )] = """Conformer IX: TTG-TC"""
+TAGL['%s-%s-reagent'    % (dbse, '10'                    )] = """Conformer X: CG-TG+A+"""
+TAGL['%s-%s-reagent'    % (dbse, '11'                    )] = """Conformer XI: CTG+G-C"""
+TAGL['dbse'] = 'conformation energies for cysteine'
 TAGL['default'] = 'entire database'
 
 # <<< Geometry Specification Strings >>>

@@ -1,10 +1,37 @@
+#
+# @BEGIN LICENSE
+#
+# QCDB: quantum chemistry common driver and databases
+#
+# Copyright (c) 2011-2017 The QCDB Developers.
+#
+# The copyrights for code used from other parties are included in
+# the corresponding files.
+#
+# This file is part of QCDB.
+#
+# QCDB is free software; you can redistribute it and/or modify
+# it under the terms of the GNU Lesser General Public License as published by
+# the Free Software Foundation, version 3.
+#
+# QCDB is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU Lesser General Public License for more details.
+#
+# You should have received a copy of the GNU Lesser General Public License along
+# with QCDB; if not, write to the Free Software Foundation, Inc.,
+# 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+#
+# @END LICENSE
+#
+
 """
-| Database of <description of members and reference energy type>.
-| Geometries from <Reference>.
-http://www.thch.uni-bonn.de/tc/downloads/GMTKN/GMTKN30/PCONF.html
-| Reference interaction energies from <Reference>.
-Taken from Reha, D.; Valdes, H.; Vondrasek, J.; Hobza, P.; Abu-Riziq, A.; Crews, B.; de Vries, M. S. Chem. Eur. J. 2005, 11, 6803-6817.
-(estimated CCSD(T)/CBS); all values are in kcal/mol.
+| Database (Hobza) of conformation energies for tripeptides.
+| Geometries and reference interaction energies from
+http://www.thch.uni-bonn.de/tc/downloads/GMTKN/GMTKN30/PCONF.html .
+| Taken from Reha, D.; Valdes, H.; Vondrasek, J.; Hobza, P.; Abu-Riziq, A.; Crews, B.; de Vries, M. S. Chem. Eur. J. 2005, 11, 6803-6817.
+| (estimated CCSD(T)/CBS); all values are in kcal/mol.
 
 
 - **benchmark**
@@ -100,35 +127,37 @@ BIND_PCONFA['%s-%s'            % (dbse, '10'                    )] =    2.254
 # Set default
 BIND = BIND_PCONFA
 # Reference information
+BINDINFO_PCONF0 = {}
 BINDINFO_PCONFA = {}
 for rxn in HRXN:
+    BINDINFO_PCONF0['%s-%s' % (dbse, rxn)] = {'citation': 'pconf0', 'method': 'CCSDT', 'mode': 'unCP', 'basis': 'tqz631gs025'}
     BINDINFO_PCONFA['%s-%s' % (dbse, rxn)] = {'citation': 'dfit', 'method': 'CCSDTAF12', 'mode': 'dfhf_dfmp_unCP', 'basis': 'aq5zadz'}  # non-f12 mp2 xtpl
 
 # <<< Comment Lines >>>
 TAGL = {}
-TAGL['%s-%s'            % (dbse, '1'                     )] = """Reaction 1 """
-TAGL['%s-%s'            % (dbse, '2'                     )] = """Reaction 2 """
-TAGL['%s-%s'            % (dbse, '3'                     )] = """Reaction 3 """
-TAGL['%s-%s'            % (dbse, '4'                     )] = """Reaction 4 """
-TAGL['%s-%s'            % (dbse, '5'                     )] = """Reaction 5 """
-TAGL['%s-%s'            % (dbse, '6'                     )] = """Reaction 6 """
-TAGL['%s-%s'            % (dbse, '7'                     )] = """Reaction 7 """
-TAGL['%s-%s'            % (dbse, '8'                     )] = """Reaction 8 """
-TAGL['%s-%s'            % (dbse, '9'                     )] = """Reaction 9 """
-TAGL['%s-%s'            % (dbse, '10'                    )] = """Reaction 10 """
-TAGL['%s-%s-reagent'    % (dbse, '114'                   )] = """ """
-TAGL['%s-%s-reagent'    % (dbse, '215'                   )] = """ """
-TAGL['%s-%s-reagent'    % (dbse, '224'                   )] = """ """
-TAGL['%s-%s-reagent'    % (dbse, '300'                   )] = """ """
-TAGL['%s-%s-reagent'    % (dbse, '357'                   )] = """ """
-TAGL['%s-%s-reagent'    % (dbse, '366'                   )] = """ """
-TAGL['%s-%s-reagent'    % (dbse, '412'                   )] = """ """
-TAGL['%s-%s-reagent'    % (dbse, '444'                   )] = """ """
-TAGL['%s-%s-reagent'    % (dbse, '470'                   )] = """ """
-TAGL['%s-%s-reagent'    % (dbse, '691'                   )] = """ """
-TAGL['%s-%s-reagent'    % (dbse, '99'                    )] = """ """
+TAGL['%s-%s'            % (dbse, '1'                     )] = """FGG 444 vs. 99"""
+TAGL['%s-%s'            % (dbse, '2'                     )] = """FGG 357 vs. 99"""
+TAGL['%s-%s'            % (dbse, '3'                     )] = """FGG 366 vs. 99"""
+TAGL['%s-%s'            % (dbse, '4'                     )] = """FGG 215 vs. 99"""
+TAGL['%s-%s'            % (dbse, '5'                     )] = """FGG 300 vs. 99"""
+TAGL['%s-%s'            % (dbse, '6'                     )] = """FGG 114 vs. 99"""
+TAGL['%s-%s'            % (dbse, '7'                     )] = """FGG 412 vs. 99"""
+TAGL['%s-%s'            % (dbse, '8'                     )] = """FGG 691 vs. 99"""
+TAGL['%s-%s'            % (dbse, '9'                     )] = """FGG 470 vs. 99"""
+TAGL['%s-%s'            % (dbse, '10'                    )] = """FGG 224 vs. 99"""
+TAGL['%s-%s-reagent'    % (dbse, '114'                   )] = """FGG 114"""
+TAGL['%s-%s-reagent'    % (dbse, '215'                   )] = """FGG 215"""
+TAGL['%s-%s-reagent'    % (dbse, '224'                   )] = """FGG 224"""
+TAGL['%s-%s-reagent'    % (dbse, '300'                   )] = """FGG 300"""
+TAGL['%s-%s-reagent'    % (dbse, '357'                   )] = """FGG 357"""
+TAGL['%s-%s-reagent'    % (dbse, '366'                   )] = """FGG 366"""
+TAGL['%s-%s-reagent'    % (dbse, '412'                   )] = """FGG 412"""
+TAGL['%s-%s-reagent'    % (dbse, '444'                   )] = """FGG 444"""
+TAGL['%s-%s-reagent'    % (dbse, '470'                   )] = """FGG 470"""
+TAGL['%s-%s-reagent'    % (dbse, '691'                   )] = """FGG 691"""
+TAGL['%s-%s-reagent'    % (dbse, '99'                    )] = """FGG 99"""
 
-TAGL['dbse'] = 'comformation energies for tripeptides'
+TAGL['dbse'] = 'conformation energies for tripeptides'
 TAGL['default'] = 'entire database'
 
 # <<< Geometry Specification Strings >>>
