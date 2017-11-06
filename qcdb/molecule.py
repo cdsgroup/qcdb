@@ -21,6 +21,7 @@
 #
 from __future__ import absolute_import
 from __future__ import print_function
+from __future__ import division
 
 import os
 #import re
@@ -35,6 +36,7 @@ import subprocess
 import socket
 import shutil
 import random
+import numpy as np
 from collections import defaultdict
 from .libmintsmolecule import *
 
@@ -616,7 +618,7 @@ class Molecule(LibmintsMolecule):
                     continue
                 # any fragment marker here <<<
                 if self.nactive_fragments() > 1:
-                    # this only distiguishes Real frags so Real/Ghost don't get 
+                    # this only distinguishes Real frags so Real/Ghost don't get 
                     #   fragmentation. may need to change
                     text += """--\n"""
                                          # >>>
@@ -633,12 +635,12 @@ class Molecule(LibmintsMolecule):
                     else:
                         if self.fZ(at):
                             # label for real live atom <<<
-                            text += """{:>3s} """.format(self.symbol(at))
+                            text += """{:>3s} """.format(self.fsymbol(at))
                                                      # >>>
                         else:
                             # label for ghost atom <<<
                             text += """{:>3s} """.format(
-                                'Gh' if mixedbas else ('@' + self.symbol(at)))                
+                                'Gh' if mixedbas else ('@' + self.fsymbol(at)))                
                                                  # >>>
                         [x, y, z] = self.full_atoms[at].compute()
                         # Cartesian coordinates <<<
@@ -817,6 +819,9 @@ class Molecule(LibmintsMolecule):
             #'S':  1.683 / 1.5,  # JMol
             #'CL': 1.639 / 1.5,  # JMol
             'AR': 1.595 / 1.5,  # JMol
+
+            'KR': 2.02 / 1.5  # Google
+            'RN': 1.595 / 1.5 # extrapolation
 
             'H': 1.06 / 1.5,  # Bondi JPC 68 441 (1964)
             'B': 1.65 / 1.5,  # Bondi JPC 68 441 (1964)
@@ -1112,6 +1117,71 @@ class Molecule(LibmintsMolecule):
         """
         coc = scale(self.center_of_charge(), -1.0)
         self.translate(coc)
+
+    def rotational_symmetry_number(self):
+        """Number of unique orientations of the rigid molecule that only interchange identical atoms.
+        Notes
+        -----
+        Source http://cccbdb.nist.gov/thermo.asp (search "symmetry number")
+        """
+        pg = self.get_full_point_group()
+        pg = self.full_point_group_with_n()
+        if pg in ['ATOM', 'C1', 'Ci', 'Cs', 'C_inf_v']:
+            sigma = 1
+        elif pg == 'D_inf_h':
+            sigma = 2
+        elif pg in ['T', 'Td']:
+            sigma = 12
+        elif pg == 'Oh':
+            sigma = 24
+        elif pg == 'Ih':
+            sigma = 60
+        elif pg in ['Cn', 'Cnv', 'Cnh']:
+            sigma = self.full_pg_n()
+        elif pg in ['Dn', 'Dnd', 'Dnh']:
+            sigma = 2 * self.full_pg_n()
+        elif pg == 'Sn':
+            sigma = self.full_pg_n() / 2
+        else:
+            raise ValidationError("Can't ID full symmetry group: " + pg)
+
+        return sigma
+
+    def axis_representation(self, zero=1e-8):
+        """Molecule vs. laboratory frame representation (e.g., IR or IIIL).
+        Parameters
+        ----------
+        zero : float, optional
+            Screen for inertial tensor elements
+        Returns
+        -------
+        str
+            Representation code IR, IIR, IIIR, IL, IIL, IIIL. When
+            molecule not in inertial frame, string is prefixed by "~".
+        Notes
+        -----
+        Not carefully handling degenerate inertial elements.
+        """
+        it = self.inertia_tensor(zero=zero)
+        Iidx = np.argsort(np.diagonal(it))
+        if np.array_equal(Iidx, np.asarray([1, 2, 0])):
+            ar = 'IR'
+        elif np.array_equal(Iidx, np.asarray([2, 0, 1])):
+            ar = 'IIR'
+        elif np.array_equal(Iidx, np.asarray([0, 1, 2])):
+            ar = 'IIIR'
+        elif np.array_equal(Iidx, np.asarray([2, 1, 0])):
+            ar = 'IL'
+        elif np.array_equal(Iidx, np.asarray([0, 2, 1])):
+            ar = 'IIL'
+        elif np.array_equal(Iidx, np.asarray([1, 0, 2])):
+            ar = 'IIIL'
+
+        # if inertial tensor has non-zero off-diagonals, this whole classification is iffy
+        if np.count_nonzero(it - np.diag(np.diagonal(it))):
+            ar = '~' + ar
+
+        return ar
 
     def align_molecules(self, ref, weight=None, alg='svd',
                           return_aligned=False):
