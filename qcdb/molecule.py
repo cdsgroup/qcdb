@@ -1190,13 +1190,13 @@ class Molecule(LibmintsMolecule):
 
         return ar
 
-    def align_molecules(self, ref, weight=None, alg='svd',
+    def align_molecules(self, ref, weight=None, alg='quaternion',
                           return_aligned=False):
         """Compares geometry of molecule to reference geometry *ref*.
 
         Uses Kabsch algorithm to compute the optimal alignment of two
         molecular geometries P and Q by minimizing the norm of the residual,
-        || Q - U * P||.  
+        || Q - P*U||.  
 
         Arguments:
         <qcdb.Molecule> self := Molecule to compare to existing reference
@@ -1244,25 +1244,25 @@ class Molecule(LibmintsMolecule):
         Q = Qmol[:, 1:] * w
         
         # Translate P & Q to global origin by subtracting away respective centroids
-        P = (P - P.mean(axis=0)).T
-        Q = (Q - Q.mean(axis=0)).T
+        P = (P - P.mean(axis=0))
+        Q = (Q - Q.mean(axis=0))
 
         # Choose algorithm, compute rotation, & rotate P onto Q
-        if alg.lower() == 'svd':
-            R = self.kabsch_svd(P, Q) 
-            P = R.dot(P)
-        elif alg.lower() == 'quaternion':
-            R = self.kabsch_quaternion(P, Q)
-            P = R.dot(P)
+        if alg.lower() == 'quaternion':
+            R = self.kabsch_quaternion(P.T, Q.T)
+            P = P.dot(R)
+        elif alg.lower() == 'svd':
+            R = self.kabsch_svd(P.T, Q.T)
+            P = P.dot(R)
 
         # Compute & Return RMSD
-        rmsd = np.linalg.norm(Q.T - P.T) / np.sqrt(P.T.shape[0])
+        rmsd = np.linalg.norm(Q - P) / np.sqrt(P.shape[0])
 
         # Returns
         if return_aligned:
-            self.set_geometry(P.T, units='AA')
+            self.set_geometry(P, units='AA')
             self.update_geometry()
-            ref.set_geometry(Q.T, units='AA')
+            ref.set_geometry(Q, units='AA')
             ref.update_geometry()
             return rmsd, self, ref
         else:
@@ -1271,7 +1271,7 @@ class Molecule(LibmintsMolecule):
     def kabsch_svd(self, P, Q):
         """Computes the optimal rotation matrix R which maps a set of N points 
         P = {p_n | p in R^M} onto a set of N points Q = {q_n | q in R^M} according
-        to the minimization of ||Q - R*P||, using the SVD formulation of the Kabsch 
+        to the minimization of ||Q - P*R||, using the SVD formulation of the Kabsch 
         algorithm.
     
         Arguments:
@@ -1298,7 +1298,7 @@ class Molecule(LibmintsMolecule):
 
     def kabsch_quaternion(self, P, Q):
         """Computes the optimal rotation matrix U which mapping a set of points P onto 
-        the set of points Q according to the minimization of ||Q - R*P||, using the
+        the set of points Q according to the minimization of ||Q - P*R||, using the
         unit quaternion formulation of the Kabsch algorithm.
 
         Arguments:
