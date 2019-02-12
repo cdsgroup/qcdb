@@ -1,0 +1,61 @@
+mv BBI-DFMP2-dfhf-dfmp-adz.mp2.usemecorl   BBI-DFMP2-dfhf-dfmp-unCP-adz.mp2.usemecorl
+mv BBI-DFMP2-dfhf-dfmp-adz.mp2.usemetrip   BBI-DFMP2-dfhf-dfmp-unCP-adz.mp2.usemetrip
+mv BBI-DFMP2-dfhf-dfmp-adz.usemeraw        BBI-DFMP2-dfhf-dfmp-unCP-adz.usemeraw
+mv BBI-DFMP2-dfhf-dfmp-aqz.mp2.usemecorl   BBI-DFMP2-dfhf-dfmp-unCP-aqz.mp2.usemecorl
+mv BBI-DFMP2-dfhf-dfmp-aqz.mp2.usemetrip   BBI-DFMP2-dfhf-dfmp-unCP-aqz.mp2.usemetrip
+mv BBI-DFMP2-dfhf-dfmp-aqz.usemeraw        BBI-DFMP2-dfhf-dfmp-unCP-aqz.usemeraw
+mv BBI-DFMP2-dfhf-dfmp-atz.mp2.usemecorl   BBI-DFMP2-dfhf-dfmp-unCP-atz.mp2.usemecorl
+mv BBI-DFMP2-dfhf-dfmp-atz.mp2.usemetrip   BBI-DFMP2-dfhf-dfmp-unCP-atz.mp2.usemetrip
+mv BBI-DFMP2-dfhf-dfmp-atz.usemeraw        BBI-DFMP2-dfhf-dfmp-unCP-atz.usemeraw
+mv SSI-DFMP2-dfhf-dfmp-adz.mp2.usemecorl   SSI-DFMP2-dfhf-dfmp-unCP-adz.mp2.usemecorl
+mv SSI-DFMP2-dfhf-dfmp-adz.mp2.usemetrip   SSI-DFMP2-dfhf-dfmp-unCP-adz.mp2.usemetrip
+mv SSI-DFMP2-dfhf-dfmp-adz.usemeraw        SSI-DFMP2-dfhf-dfmp-unCP-adz.usemeraw
+mv SSI-DFMP2-dfhf-dfmp-aqz.mp2.usemecorl   SSI-DFMP2-dfhf-dfmp-unCP-aqz.mp2.usemecorl
+mv SSI-DFMP2-dfhf-dfmp-aqz.mp2.usemetrip   SSI-DFMP2-dfhf-dfmp-unCP-aqz.mp2.usemetrip
+mv SSI-DFMP2-dfhf-dfmp-aqz.usemeraw        SSI-DFMP2-dfhf-dfmp-unCP-aqz.usemeraw
+mv SSI-DFMP2-dfhf-dfmp-atz.mp2.usemecorl   SSI-DFMP2-dfhf-dfmp-unCP-atz.mp2.usemecorl
+mv SSI-DFMP2-dfhf-dfmp-atz.mp2.usemetrip   SSI-DFMP2-dfhf-dfmp-unCP-atz.mp2.usemetrip
+mv SSI-DFMP2-dfhf-dfmp-atz.usemeraw        SSI-DFMP2-dfhf-dfmp-unCP-atz.usemeraw
+mv SSI-DFMP2-dfhf-dfmp-qz.mp2.usemecorl    SSI-DFMP2-dfhf-dfmp-unCP-qz.mp2.usemecorl
+mv SSI-DFMP2-dfhf-dfmp-qz.mp2.usemetrip    SSI-DFMP2-dfhf-dfmp-unCP-qz.mp2.usemetrip
+mv SSI-DFMP2-dfhf-dfmp-qz.usemeraw         SSI-DFMP2-dfhf-dfmp-unCP-qz.usemeraw
+
+# 18 Oct 2017, after renames above, sent below to Anders Steen Christensen
+
+BBI-DFMP2-dfhf-dfmp-unCP-adz.mp2.usemecorl
+BBI-DFMP2-dfhf-dfmp-unCP-adz.mp2.usemetrip
+BBI-DFMP2-dfhf-dfmp-unCP-adz.usemeraw
+BBI-DFMP2-dfhf-dfmp-unCP-aqz.mp2.usemecorl
+BBI-DFMP2-dfhf-dfmp-unCP-aqz.mp2.usemetrip
+BBI-DFMP2-dfhf-dfmp-unCP-aqz.usemeraw
+BBI-DFMP2-dfhf-dfmp-unCP-atz.mp2.usemecorl
+BBI-DFMP2-dfhf-dfmp-unCP-atz.mp2.usemetrip
+BBI-DFMP2-dfhf-dfmp-unCP-atz.usemeraw
+BBI-DFMP2-dfhf-dfmp-unCP-qz.mp2.usemecorl
+BBI-DFMP2-dfhf-dfmp-unCP-qz.mp2.usemetrip
+BBI-DFMP2-dfhf-dfmp-unCP-qz.usemeraw
+SSI-DFMP2-dfhf-dfmp-CP-adz.mp2.usemecorl
+SSI-DFMP2-dfhf-dfmp-CP-adz.mp2.usemetrip
+SSI-DFMP2-dfhf-dfmp-CP-adz.usemeraw
+SSI-DFMP2-dfhf-dfmp-CP-aqz.mp2.usemecorl
+SSI-DFMP2-dfhf-dfmp-CP-aqz.mp2.usemetrip
+SSI-DFMP2-dfhf-dfmp-CP-aqz.usemeraw
+SSI-DFMP2-dfhf-dfmp-CP-atz.mp2.usemecorl
+SSI-DFMP2-dfhf-dfmp-CP-atz.mp2.usemetrip
+SSI-DFMP2-dfhf-dfmp-CP-atz.usemeraw
+SSI-DFMP2-dfhf-dfmp-CP-qz.mp2.usemecorl
+SSI-DFMP2-dfhf-dfmp-CP-qz.mp2.usemetrip
+SSI-DFMP2-dfhf-dfmp-CP-qz.usemeraw
+SSI-DFMP2-dfhf-dfmp-unCP-adz.mp2.usemecorl
+SSI-DFMP2-dfhf-dfmp-unCP-adz.mp2.usemetrip
+SSI-DFMP2-dfhf-dfmp-unCP-adz.usemeraw
+SSI-DFMP2-dfhf-dfmp-unCP-aqz.mp2.usemecorl
+SSI-DFMP2-dfhf-dfmp-unCP-aqz.mp2.usemetrip
+SSI-DFMP2-dfhf-dfmp-unCP-aqz.usemeraw
+SSI-DFMP2-dfhf-dfmp-unCP-atz.mp2.usemecorl
+SSI-DFMP2-dfhf-dfmp-unCP-atz.mp2.usemetrip
+SSI-DFMP2-dfhf-dfmp-unCP-atz.usemeraw
+SSI-DFMP2-dfhf-dfmp-unCP-qz.mp2.usemecorl
+SSI-DFMP2-dfhf-dfmp-unCP-qz.mp2.usemetrip
+SSI-DFMP2-dfhf-dfmp-unCP-qz.usemeraw
+
